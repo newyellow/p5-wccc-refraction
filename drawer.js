@@ -1,10 +1,12 @@
-let LASER_DOT_DENSITY = 12.0;
+let BEAM_DOT_DENSITY = 12.0;
 let BEAM_SPREAD_RANGE = 0.1;
+let BEAM_THICKNESS = 1.0;
 
 function drawLaserLine (_x1, _y1, _x2, _y2) {
 
-    let dotCount = dist(_x1, _y1, _x2, _y2) * LASER_DOT_DENSITY;
+    let dotCount = dist(_x1, _y1, _x2, _y2) * BEAM_DOT_DENSITY;
 
+    strokeWeight(0.3);
     for(let i=0; i< dotCount; i++)
     {
         let posT = random(0, 1);

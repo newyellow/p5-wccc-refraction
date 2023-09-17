@@ -254,9 +254,9 @@ let resultCount = 0;
 // check intersection point and calculate refract angle
 // refract reference: https://www.omnicalculator.com/physics/angle-of-refraction
 function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
-  console.log("COUNTER::: " + resultCount++);
-  console.log("nowN1: " + _n1);
-  console.log("nowN2: " + _n2);
+  // console.log("COUNTER::: " + resultCount++);
+  // console.log("nowN1: " + _n1);
+  // console.log("nowN2: " + _n2);
   let intersectionDatas = getBeamRefractorIntersectionDatas(_beam, _refractor);
 
   if (intersectionDatas == false) {
@@ -289,17 +289,17 @@ function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
   let refractPoint = { x: closestData.x, y: closestData.y };
 
   let surfaceAngle = getAngle(closestData.line.x1, closestData.line.y1, closestData.line.x2, closestData.line.y2);
-  console.log("surface Angle: " + surfaceAngle);
+  // console.log("surface Angle: " + surfaceAngle);
 
   let normalA = processAngleRange(surfaceAngle + 90);
   let normalA_Beam = new Beam(refractPoint.x, refractPoint.y, normalA, new NYColor(60, 100, 100));
   // normalA_Beam.draw();
-  console.log("normalA: " + normalA);
+  // console.log("normalA: " + normalA);
 
   let normalB = processAngleRange(surfaceAngle - 90);
   let normalB_Beam = new Beam(refractPoint.x, refractPoint.y, normalB, new NYColor(120, 100, 100));
   // normalB_Beam.draw();
-  console.log("normalB: " + normalB);
+  // console.log("normalB: " + normalB);
 
   let normalA_theta = abs(normalA - _beam.angle);
   if (normalA_theta > 180)
@@ -308,8 +308,8 @@ function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
   let normalB_theta = abs(normalB - _beam.angle);
   if (normalB_theta > 180)
     normalB_theta = 360 - normalB_theta;
-  console.log("normalA Diff: " + normalA_theta);
-  console.log("normalB Diff: " + normalB_theta);
+  // console.log("normalA Diff: " + normalA_theta);
+  // console.log("normalB Diff: " + normalB_theta);
 
   let targetNormal = 0.0;
   if (normalA_theta > normalB_theta)
@@ -317,14 +317,14 @@ function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
   else
     targetNormal = normalA;
 
-  console.log("targetNormal: " + targetNormal);
+  // console.log("targetNormal: " + targetNormal);
 
   let theta1 = min(normalA_theta, normalB_theta);
 
   let n1 = _n1;
   let n2 = _n2;
   let calculateData = n1 * sin(radians(theta1)) / n2;
-  console.log("ratioData: " + calculateData);
+  // console.log("ratioData: " + calculateData);
 
   let resultAngle = 0.0;
   let newN1 = n1;
@@ -341,13 +341,13 @@ function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
     let theta2 = asin(n1 * sin(radians(theta1)) / n2);
 
     let angleDiff = _beam.angle - targetNormal;
-    console.log('angle diff1: ' + angleDiff);
+    // console.log('angle diff1: ' + angleDiff);
     if (angleDiff > 180)
       angleDiff -= 360;
     else if (angleDiff < -180)
       angleDiff += 360;
 
-    console.log('angle diff: ' + angleDiff);
+    // console.log('angle diff: ' + angleDiff);
 
     if (angleDiff > 0)
       resultAngle = targetNormal + degrees(theta2);
@@ -357,7 +357,7 @@ function getBeamRefractorResult(_beam, _refractor, _n1, _n2) {
     newN1 = n2;
     newN2 = n1;
   }
-  console.log(resultAngle);
+  // console.log(resultAngle);
 
   return {
     'contactPoint': refractPoint,

@@ -101,7 +101,6 @@ class Beam {
     }
 
     draw() {
-        console.log("inside draw beam");
         let beamLength = max(width, height) * 2;
         let x2 = this.x + beamLength * sin(radians(this.angle));
         let y2 = this.y - beamLength * cos(radians(this.angle));
